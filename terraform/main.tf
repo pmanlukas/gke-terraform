@@ -59,6 +59,8 @@ module "gke" {
   subnetwork             = module.gcp-network.subnets_names[0]
   ip_range_pods          = var.ip_range_pods_name
   ip_range_services      = var.ip_range_services_name
+  horizontal_pod_autoscaling = true
+  
   node_pools = [
     {
       name                      = "node-pool"
@@ -68,5 +70,13 @@ module "gke" {
       max_count                 = 3
       disk_size_gb              = 30
     },
+    {
+      name                      = "compute-intense-pool"
+      machine_type              = "n1-highcpu-4"
+      node_locations            = "us-east1-b"
+      min_count                 = 1
+      max_count                 = 1
+      disk_size_gb              = 100
+   }
   ]
 }
