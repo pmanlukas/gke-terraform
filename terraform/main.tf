@@ -10,6 +10,8 @@ terraform {
 provider "google" {
   
 }
+
+
 module "gke_auth" {
   source = "terraform-google-modules/kubernetes-engine/google//modules/auth"
   depends_on   = [module.gke]
@@ -61,9 +63,9 @@ module "gke" {
     {
       name                      = "node-pool"
       machine_type              = "e2-medium"
-      node_locations            = "europe-west1-b,europe-west1-c,europe-west1-d"
+      node_locations            = "us-east1-b,us-east1-c,us-east1-d"
       min_count                 = 1
-      max_count                 = 2
+      max_count                 = 3
       disk_size_gb              = 30
     },
   ]
