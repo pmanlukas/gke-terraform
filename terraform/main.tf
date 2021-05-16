@@ -1,4 +1,8 @@
 terraform {
+   backend "gcs" {
+    bucket  = "lp-terraform-bucket"
+    prefix  = "terraform/state"
+  }
   required_providers {
     google = {
       source = "hashicorp/google"
@@ -8,7 +12,9 @@ terraform {
 }
 
 provider "google" {
-  
+  project     = var.project_id
+  credentials = file(var.gcp_auth_file)
+  region      = var.region
 }
 
 
@@ -69,14 +75,6 @@ module "gke" {
       min_count                 = 1
       max_count                 = 3
       disk_size_gb              = 30
-    },
-    {
-      name                      = "compute-intense-pool"
-      machine_type              = "n1-highcpu-4"
-      node_locations            = "us-east1-b"
-      min_count                 = 1
-      max_count                 = 1
-      disk_size_gb              = 100
-   }
+    }
   ]
 }

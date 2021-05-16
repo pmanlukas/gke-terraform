@@ -1,3 +1,7 @@
+variable "gcp_auth_file" {
+  type        = string
+  description = "GCP authentication file"
+}
 variable "project_id" {
   description = "The project ID to host the cluster in"
   default     = "lp-gke-test"
@@ -29,4 +33,8 @@ variable "ip_range_pods_name" {
 variable "ip_range_services_name" {
   description = "The secondary ip range to use for services"
   default     = "ip-range-services"
+}
+variable "bucket-name" {
+  type        = string
+  description = "The name of the Google Storage Bucket to create"
 }

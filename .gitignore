@@ -114,3 +114,4 @@ terraform/terraform.tfstate.backup
 ## Credentials
 creds/
 
+terraform/terraform.tfvars
